@@ -4,391 +4,195 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Martin Family Movie Picker</title>
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIk1hcnRpbiBGYW1pbHkgTW92aWUgUGlja2VyIiwKICAic2hvcnRfbmFtZSI6ICJNb3ZpZSBQaWNrZXIiLAogICJkZXNjcmlwdGlvbiI6ICJQaWNrIHJhbmRvbSBtb3ZpZXMgZnJvbSB5b3VyIGNvbGxlY3Rpb24iLAogICJzdGFydF91cmwiOiAiLyIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzFhMjAyYyIsCiAgInRoZW1lX2NvbG9yIjogIiM2MzY2ZjEiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSGRwWkhSb1BTSXlOVFlpSUdobGFXZG9kRDBpTWpVMklqNE5DaUE4Y21WamRDQjNhV1IwYUQwaU1qVTJJaUJvWldsbmFIUTlJakl5TkNJZ1ptbHNiRDBpSTJZeE5EazJPQ0kvUGcwS0lDQThjblJsTWpRaElEeEpJRXhsZEVsMFIyOGdJRnd2UGcwS0lEd3ZjM1puUGcwSyIsCiAgICAgICJzaXplcyI6ICIyNTZ4MjU2IiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0KICBdCn0=">
-    <meta name="theme-color" content="#6366f1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Movie Picker">
-    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTYiIGhlaWdodD0iMjU2Ij4NCiAgPHJlY3Qgd2lkdGg9IjI1NiIgaGVpZ2h0PSIyMjQiIGZpbGw9IiNmMTQ5NjgiLz4NCiAgPHRleHQgeD0iNzgiIHk9IjE3NiIgZm9udC1zaXplPSI4NiIgZmlsbD0iI2ZmZiI+8J+OrCM8L3RleHQ+DQo8L3N2Zz4NCg==">
-    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin: 0;
+            padding: 20px;
             min-height: 100vh;
-            padding: 1rem;
         }
         
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            color: white;
         }
         
         .header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 30px;
         }
         
         .title {
             font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
+            margin-bottom: 10px;
         }
         
-        .subtitle {
-            opacity: 0.8;
-            font-size: 1.1rem;
-        }
-        
-        .section {
+        .card {
             background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .section-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            padding: 20px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
         }
         
         .btn {
             background: rgba(255, 255, 255, 0.2);
-            border: none;
             color: white;
-            padding: 0.75rem 1.5rem;
+            border: none;
+            padding: 12px 20px;
             border-radius: 10px;
-            font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin: 0.25rem;
+            margin: 5px;
+            font-size: 16px;
         }
         
         .btn:hover {
             background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
         }
         
         .btn.active {
             background: #10b981;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
         }
         
         .btn.primary {
-            background: linear-gradient(45deg, #f59e0b, #f97316);
-            font-size: 1.2rem;
-            padding: 1rem 2rem;
+            background: #f59e0b;
+            font-size: 20px;
+            padding: 15px 30px;
             font-weight: bold;
-            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3);
         }
         
         .users-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 0.5rem;
-            margin-bottom: 1rem;
+            gap: 10px;
+            margin: 15px 0;
         }
         
         .user-card {
             background: rgba(255, 255, 255, 0.1);
-            padding: 0.75rem;
-            border-radius: 10px;
+            padding: 10px;
+            border-radius: 8px;
             text-align: center;
-            transition: all 0.3s ease;
         }
         
         .user-card.current {
             background: #fbbf24;
             color: #1f2937;
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
-        }
-        
-        .filters-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-        
-        .filter-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-        
-        .filter-group select {
-            width: 100%;
-            padding: 0.5rem;
-            border-radius: 8px;
-            border: none;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            font-size: 0.9rem;
-        }
-        
-        .filter-group select option {
-            background: #1f2937;
-            color: white;
+            font-weight: bold;
         }
         
         .movie-result {
-            background: linear-gradient(45deg, rgba(16, 185, 129, 0.2), rgba(59, 130, 246, 0.2));
-            border: 2px solid rgba(16, 185, 129, 0.3);
+            background: rgba(16, 185, 129, 0.2);
+            border: 2px solid #10b981;
             border-radius: 15px;
-            padding: 1.5rem;
-            margin-top: 1.5rem;
+            padding: 20px;
+            margin: 20px 0;
         }
         
         .movie-title {
             font-size: 1.5rem;
-            font-weight: bold;
             color: #fbbf24;
-            margin-bottom: 1rem;
+            font-weight: bold;
+            margin-bottom: 15px;
         }
         
         .movie-details {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-        
-        .watched-movies {
-            max-height: 200px;
-            overflow-y: auto;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            padding: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
         }
         
         .watched-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 0.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 8px;
         }
         
         .watched-item {
             background: rgba(255, 255, 255, 0.1);
-            padding: 0.5rem;
-            border-radius: 8px;
-            font-size: 0.85rem;
-        }
-        
-        .install-prompt {
-            background: linear-gradient(45deg, #8b5cf6, #06b6d4);
-            text-align: center;
-            padding: 1rem;
-            border-radius: 15px;
-            margin-bottom: 1.5rem;
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 14px;
         }
         
         .hidden {
             display: none;
         }
         
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-                margin: 0.5rem;
-            }
-            
-            .title {
-                font-size: 2rem;
-            }
-            
-            .filters-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .users-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            margin: 5px 0;
+        }
+        
+        select option {
+            background: #1f2937;
+            color: white;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Install Prompt -->
-        <div id="installPrompt" class="install-prompt hidden">
-            <h3>📱 Install Movie Picker App</h3>
-            <p>Add this app to your home screen for quick access!</p>
-            <button id="installBtn" class="btn primary">Install App</button>
-        </div>
-
         <div class="header">
             <h1 class="title">🎬 Martin Family Movie Picker</h1>
-            <p class="subtitle" id="collectionInfo">Loading your movie collection...</p>
+            <p id="movieCount">Sample Collection: 12 movies available</p>
         </div>
 
         <!-- Selection Mode -->
-        <div class="section">
-            <h2 class="section-title">👥 Selection Mode</h2>
+        <div class="card">
+            <h2>👥 Selection Mode</h2>
             <button id="randomBtn" class="btn active">🎲 Random Pick</button>
             <button id="alternatingBtn" class="btn">🔄 Alternating Turns</button>
             
-            <div id="usersSection" class="hidden" style="margin-top: 1rem;">
-                <h3 style="margin-bottom: 0.5rem;">👑 Current Turn</h3>
+            <div id="usersSection" class="hidden">
+                <h3 style="margin: 15px 0 10px 0;">👑 Turn Order</h3>
                 <div class="users-grid" id="usersGrid"></div>
-                <p id="turnInfo" style="margin-top: 0.5rem; opacity: 0.8;"></p>
+                <p id="turnInfo" style="color: #10b981; font-weight: bold;"></p>
             </div>
         </div>
 
-        <!-- Filters -->
-        <div class="section">
-            <h2 class="section-title">🎛️ Filters</h2>
-            <div class="filters-grid">
-                <div class="filter-group">
-                    <label>Genre</label>
-                    <select id="genreFilter">
-                        <option value="all">All Genres</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label>Format</label>
-                    <select id="formatFilter">
-                        <option value="all">All Formats</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label>Decade</label>
-                    <select id="decadeFilter">
-                        <option value="all">All Decades</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label>Adult Content</label>
-                    <select id="adultFilter">
-                        <option value="all">All Content</option>
-                        <option value="No">Family Friendly</option>
-                        <option value="Yes">Adult Content</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label>3D</label>
-                    <select id="threeDFilter">
-                        <option value="all">All Movies</option>
-                        <option value="Yes">3D Only</option>
-                        <option value="No">2D Only</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label>Location</label>
-                    <select id="locationFilter">
-                        <option value="all">All Locations</option>
-                    </select>
-                </div>
-            </div>
-            <div style="margin-top: 1rem;">
-                <button id="clearFiltersBtn" class="btn">🗑️ Clear Filters</button>
-                <span id="filteredCount" style="margin-left: 1rem; opacity: 0.8;"></span>
-            </div>
-        </div>
-
-        <!-- Movie Picker -->
-        <div class="section" style="text-align: center;">
+        <!-- Pick Button -->
+        <div class="card" style="text-align: center;">
             <button id="pickBtn" class="btn primary">🎬 Pick a Movie!</button>
             
             <div id="movieResult" class="movie-result hidden">
-                <div id="pickerInfo" style="text-align: right; margin-bottom: 1rem; font-size: 0.9rem;"></div>
+                <div id="pickerInfo" style="text-align: right; margin-bottom: 10px; color: #fbbf24;"></div>
                 <div class="movie-title" id="movieTitle"></div>
                 <div class="movie-details" id="movieDetails"></div>
-                <div style="margin-top: 1rem;">
-                    <button id="watchedBtn" class="btn">⭐ Mark as Watched</button>
-                    <button id="pickAnotherBtn" class="btn">🎲 Pick Another</button>
-                </div>
+                <button id="watchedBtn" class="btn" style="background: #10b981;">⭐ Mark Watched</button>
+                <button id="pickAnotherBtn" class="btn">🎲 Pick Another</button>
             </div>
         </div>
 
         <!-- Watched Movies -->
-        <div class="section">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                <h2 class="section-title">📅 Watched Movies (<span id="watchedCount">0</span>)</h2>
-                <button id="resetWatchedBtn" class="btn">🔄 Reset List</button>
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2>📅 Watched Movies (<span id="watchedCount">0</span>)</h2>
+                <button id="resetBtn" class="btn" style="background: #ef4444;">🔄 Reset</button>
             </div>
-            <div class="watched-movies">
-                <div id="watchedGrid" class="watched-grid">
-                    <p style="text-align: center; opacity: 0.7;">No movies watched yet. Start picking!</p>
-                </div>
+            <div id="watchedGrid" class="watched-grid">
+                <p style="text-align: center; opacity: 0.7;">No movies watched yet!</p>
             </div>
         </div>
     </div>
 
     <script>
-        // App State
-        let movies = [];
-        let filteredMovies = [];
-        let watchedMovies = [];
-        let currentMode = 'random';
-        let currentUserIndex = 0;
-        let selectedMovie = null;
-        
-        const users = ['Xavier Martin', 'Nancy Martin', 'Nadia Martin', 'Eric Martin', 'Guest'];
-        
-        // DOM Elements
-        const elements = {
-            collectionInfo: document.getElementById('collectionInfo'),
-            randomBtn: document.getElementById('randomBtn'),
-            alternatingBtn: document.getElementById('alternatingBtn'),
-            usersSection: document.getElementById('usersSection'),
-            usersGrid: document.getElementById('usersGrid'),
-            turnInfo: document.getElementById('turnInfo'),
-            genreFilter: document.getElementById('genreFilter'),
-            formatFilter: document.getElementById('formatFilter'),
-            decadeFilter: document.getElementById('decadeFilter'),
-            adultFilter: document.getElementById('adultFilter'),
-            threeDFilter: document.getElementById('threeDFilter'),
-            locationFilter: document.getElementById('locationFilter'),
-            clearFiltersBtn: document.getElementById('clearFiltersBtn'),
-            filteredCount: document.getElementById('filteredCount'),
-            pickBtn: document.getElementById('pickBtn'),
-            movieResult: document.getElementById('movieResult'),
-            pickerInfo: document.getElementById('pickerInfo'),
-            movieTitle: document.getElementById('movieTitle'),
-            movieDetails: document.getElementById('movieDetails'),
-            watchedBtn: document.getElementById('watchedBtn'),
-            pickAnotherBtn: document.getElementById('pickAnotherBtn'),
-            watchedCount: document.getElementById('watchedCount'),
-            resetWatchedBtn: document.getElementById('resetWatchedBtn'),
-            watchedGrid: document.getElementById('watchedGrid'),
-            installPrompt: document.getElementById('installPrompt'),
-            installBtn: document.getElementById('installBtn')
-        };
-
-        // Sample movie data (replace with your actual data)
-        const sampleMovies = [
+        // Sample movies
+        const movies = [
             {
-                "Title": "Babe Pig in the city ( 8 movies)",
-                "thriller": "Family",
-                "Format": "DVD",
+                "Title": "Frozen",
+                "thriller": "Kids/Animated",
+                "Format": "Blu-ray",
                 "3D": "No",
                 "Adults Only": "No",
-                "Year (Approx)": 2000,
-                "Location": 1,
-                "Furniture": "Front shelf"
-            },
-            {
-                "Title": "Evan Almighty ( 8 movies)",
-                "thriller": "Family",
-                "Format": "DVD",
-                "3D": "No",
-                "Adults Only": "No",
-                "Year (Approx)": 2007,
+                "Year (Approx)": 2013,
                 "Location": 1,
                 "Furniture": "Front shelf"
             },
@@ -403,293 +207,185 @@
                 "Furniture": "Right shelf"
             },
             {
+                "Title": "Finding Nemo",
+                "thriller": "Kids/Animated",
+                "Format": "DVD",
+                "3D": "No",
+                "Adults Only": "No",
+                "Year (Approx)": 2003,
+                "Location": 1,
+                "Furniture": "Front shelf"
+            },
+            {
                 "Title": "Inception",
                 "thriller": "Sci-Fi/Thriller",
                 "Format": "Blu-ray",
                 "3D": "No",
                 "Adults Only": "Yes",
                 "Year (Approx)": 2010,
-                "Location": 2,
-                "Furniture": "Right shelf"
+                "Location": 3,
+                "Furniture": "Left shelf"
             },
             {
-                "Title": "Frozen",
+                "Title": "Toy Story 4",
                 "thriller": "Kids/Animated",
                 "Format": "Digital",
                 "3D": "Yes",
                 "Adults Only": "No",
-                "Year (Approx)": 2013,
-                "Location": 3,
-                "Furniture": "Left shelf"
+                "Year (Approx)": 2019,
+                "Location": 4,
+                "Furniture": "Digital collection"
+            },
+            {
+                "Title": "The Lion King",
+                "thriller": "Family/Musical",
+                "Format": "Blu-ray",
+                "3D": "No",
+                "Adults Only": "No",
+                "Year (Approx)": 2019,
+                "Location": 2,
+                "Furniture": "Right shelf"
             }
         ];
 
-        // Initialize app
-        function init() {
-            loadMovies();
-            setupEventListeners();
-            setupPWA();
-            updateModeUI();
-            updateUsersUI();
+        // App state
+        let watchedMovies = JSON.parse(localStorage.getItem('watched') || '[]');
+        let currentUserIndex = 0;
+        let mode = 'random';
+        let selectedMovie = null;
+        
+        const users = ['Xavier Martin', 'Nancy Martin', 'Nadia Martin', 'Eric Martin', 'Guest'];
+
+        // Get available movies (not watched)
+        function getAvailableMovies() {
+            return movies.filter(movie => !watchedMovies.includes(movie.Title));
         }
 
-        // Load movies (in real app, this would load from your CSV)
-        function loadMovies() {
-            movies = sampleMovies; // Replace with actual CSV loading
-            filteredMovies = [...movies];
-            
-            elements.collectionInfo.textContent = `Your collection of ${movies.length} movies • ${filteredMovies.length} available to pick`;
-            
-            populateFilters();
-            updateFilteredCount();
+        // Update movie count
+        function updateCount() {
+            const available = getAvailableMovies();
+            document.getElementById('movieCount').textContent = 
+                `Sample Collection: ${available.length} of ${movies.length} movies available`;
         }
 
-        // Populate filter dropdowns
-        function populateFilters() {
-            // Genres
-            const genres = [...new Set(movies.map(m => m.thriller).filter(Boolean))].sort();
-            genres.forEach(genre => {
-                const option = document.createElement('option');
-                option.value = genre;
-                option.textContent = genre;
-                elements.genreFilter.appendChild(option);
-            });
-
-            // Formats
-            const formats = [...new Set(movies.map(m => m.Format).filter(Boolean))].sort();
-            formats.forEach(format => {
-                const option = document.createElement('option');
-                option.value = format;
-                option.textContent = format;
-                elements.formatFilter.appendChild(option);
-            });
-
-            // Decades
-            const decades = [...new Set(movies.map(m => Math.floor(m['Year (Approx)'] / 10) * 10).filter(Boolean))].sort();
-            decades.forEach(decade => {
-                const option = document.createElement('option');
-                option.value = decade;
-                option.textContent = `${decade}s`;
-                elements.decadeFilter.appendChild(option);
-            });
-
-            // Locations
-            const locations = [...new Set(movies.map(m => m.Location).filter(Boolean))].sort();
-            locations.forEach(location => {
-                const option = document.createElement('option');
-                option.value = location;
-                option.textContent = `Location ${location}`;
-                elements.locationFilter.appendChild(option);
-            });
+        // Set mode
+        function setMode(newMode) {
+            mode = newMode;
+            document.getElementById('randomBtn').classList.toggle('active', mode === 'random');
+            document.getElementById('alternatingBtn').classList.toggle('active', mode === 'alternating');
+            document.getElementById('usersSection').classList.toggle('hidden', mode === 'random');
+            updateUsers();
         }
 
-        // Setup event listeners
-        function setupEventListeners() {
-            elements.randomBtn.addEventListener('click', () => setMode('random'));
-            elements.alternatingBtn.addEventListener('click', () => setMode('alternating'));
-            
-            elements.pickBtn.addEventListener('click', pickMovie);
-            elements.watchedBtn.addEventListener('click', markAsWatched);
-            elements.pickAnotherBtn.addEventListener('click', pickMovie);
-            elements.resetWatchedBtn.addEventListener('click', resetWatched);
-            elements.clearFiltersBtn.addEventListener('click', clearFilters);
-
-            // Filter listeners
-            [elements.genreFilter, elements.formatFilter, elements.decadeFilter, 
-             elements.adultFilter, elements.threeDFilter, elements.locationFilter].forEach(filter => {
-                filter.addEventListener('change', applyFilters);
-            });
-        }
-
-        // Set selection mode
-        function setMode(mode) {
-            currentMode = mode;
-            updateModeUI();
-            updateUsersUI();
-        }
-
-        // Update mode UI
-        function updateModeUI() {
-            elements.randomBtn.classList.toggle('active', currentMode === 'random');
-            elements.alternatingBtn.classList.toggle('active', currentMode === 'alternating');
-            
-            elements.usersSection.classList.toggle('hidden', currentMode === 'random');
-        }
-
-        // Update users UI
-        function updateUsersUI() {
-            if (currentMode === 'alternating') {
-                elements.usersGrid.innerHTML = '';
+        // Update users display
+        function updateUsers() {
+            if (mode === 'alternating') {
+                const grid = document.getElementById('usersGrid');
+                grid.innerHTML = '';
+                
                 users.forEach((user, index) => {
-                    const userCard = document.createElement('div');
-                    userCard.className = `user-card ${index === currentUserIndex ? 'current' : ''}`;
-                    userCard.innerHTML = `${index === currentUserIndex ? '👑 ' : ''}${user}`;
-                    elements.usersGrid.appendChild(userCard);
+                    const card = document.createElement('div');
+                    card.className = `user-card ${index === currentUserIndex ? 'current' : ''}`;
+                    card.textContent = `${index === currentUserIndex ? '👑 ' : ''}${user}`;
+                    grid.appendChild(card);
                 });
                 
                 const nextUser = users[(currentUserIndex + 1) % users.length];
-                elements.turnInfo.textContent = `🎬 Current turn: ${users[currentUserIndex]} • Next up: ${nextUser}`;
+                document.getElementById('turnInfo').textContent = 
+                    `Current: ${users[currentUserIndex]} • Next: ${nextUser}`;
             }
         }
 
-        // Apply filters
-        function applyFilters() {
-            filteredMovies = movies.filter(movie => {
-                if (elements.genreFilter.value !== 'all' && movie.thriller !== elements.genreFilter.value) return false;
-                if (elements.formatFilter.value !== 'all' && movie.Format !== elements.formatFilter.value) return false;
-                if (elements.adultFilter.value !== 'all' && movie['Adults Only'] !== elements.adultFilter.value) return false;
-                if (elements.threeDFilter.value !== 'all' && movie['3D'] !== elements.threeDFilter.value) return false;
-                
-                if (elements.decadeFilter.value !== 'all') {
-                    const decade = Math.floor(movie['Year (Approx)'] / 10) * 10;
-                    if (decade.toString() !== elements.decadeFilter.value) return false;
-                }
-                
-                if (elements.locationFilter.value !== 'all' && movie.Location.toString() !== elements.locationFilter.value) return false;
-                
-                return !watchedMovies.includes(movie.Title);
-            });
-            
-            updateFilteredCount();
-        }
-
-        // Clear filters
-        function clearFilters() {
-            [elements.genreFilter, elements.formatFilter, elements.decadeFilter, 
-             elements.adultFilter, elements.threeDFilter, elements.locationFilter].forEach(filter => {
-                filter.value = 'all';
-            });
-            applyFilters();
-        }
-
-        // Update filtered count
-        function updateFilteredCount() {
-            elements.filteredCount.textContent = `${filteredMovies.length} movies match your filters`;
-            elements.collectionInfo.textContent = `Your collection of ${movies.length} movies • ${filteredMovies.length} available to pick`;
-        }
-
-        // Pick a movie
+        // Pick random movie
         function pickMovie() {
-            if (filteredMovies.length === 0) {
-                alert('No movies match your current filters!');
+            const available = getAvailableMovies();
+            if (available.length === 0) {
+                alert('No movies available! Reset watched list or add more movies.');
                 return;
             }
 
-            const randomIndex = Math.floor(Math.random() * filteredMovies.length);
-            selectedMovie = filteredMovies[randomIndex];
+            const randomIndex = Math.floor(Math.random() * available.length);
+            selectedMovie = available[randomIndex];
             
             // Show result
-            elements.movieResult.classList.remove('hidden');
-            elements.movieTitle.textContent = selectedMovie.Title;
+            document.getElementById('movieResult').classList.remove('hidden');
+            document.getElementById('movieTitle').textContent = selectedMovie.Title;
             
-            // Picker info
-            if (currentMode === 'alternating') {
-                const turnNumber = Math.floor(watchedMovies.length / users.length) + 1;
-                elements.pickerInfo.innerHTML = `👑 ${users[currentUserIndex]}'s Choice<br><small>Turn #${turnNumber}</small>`;
-            } else {
-                elements.pickerInfo.innerHTML = '🎲 Random Selection';
-            }
-            
-            // Movie details
-            elements.movieDetails.innerHTML = `
-                <div><strong>Genre:</strong> ${selectedMovie.thriller}</div>
-                <div><strong>Format:</strong> ${selectedMovie.Format}</div>
-                <div><strong>Year:</strong> ${selectedMovie['Year (Approx)']}</div>
-                <div><strong>Location:</strong> ${selectedMovie.Location}</div>
-                <div><strong>Storage:</strong> ${selectedMovie.Furniture}</div>
-                <div><strong>3D:</strong> ${selectedMovie['3D']}</div>
-            `;
-            
-            // Advance turn for alternating mode
-            if (currentMode === 'alternating') {
+            if (mode === 'alternating') {
+                document.getElementById('pickerInfo').textContent = 
+                    `👑 ${users[currentUserIndex]}'s Choice`;
                 currentUserIndex = (currentUserIndex + 1) % users.length;
-                updateUsersUI();
+                updateUsers();
+            } else {
+                document.getElementById('pickerInfo').textContent = '🎲 Random Pick';
             }
+            
+            document.getElementById('movieDetails').innerHTML = `
+                <div>🎭 Genre: ${selectedMovie.thriller}</div>
+                <div>💿 Format: ${selectedMovie.Format}</div>
+                <div>📅 Year: ${selectedMovie['Year (Approx)']}</div>
+                <div>🕶️ 3D: ${selectedMovie['3D']}</div>
+                <div>📍 Location: ${selectedMovie.Location}</div>
+                <div>🪑 Storage: ${selectedMovie.Furniture}</div>
+            `;
         }
 
         // Mark as watched
-        function markAsWatched() {
+        function markWatched() {
             if (selectedMovie) {
                 watchedMovies.push(selectedMovie.Title);
-                updateWatchedUI();
-                applyFilters(); // This will remove the movie from available picks
-                elements.movieResult.classList.add('hidden');
+                localStorage.setItem('watched', JSON.stringify(watchedMovies));
+                updateWatchedDisplay();
+                updateCount();
+                document.getElementById('movieResult').classList.add('hidden');
                 selectedMovie = null;
             }
         }
 
-        // Reset watched movies
-        function resetWatched() {
-            watchedMovies = [];
-            updateWatchedUI();
-            applyFilters();
-        }
-
-        // Update watched movies UI
-        function updateWatchedUI() {
-            elements.watchedCount.textContent = watchedMovies.length;
+        // Update watched display
+        function updateWatchedDisplay() {
+            document.getElementById('watchedCount').textContent = watchedMovies.length;
+            const grid = document.getElementById('watchedGrid');
             
             if (watchedMovies.length === 0) {
-                elements.watchedGrid.innerHTML = '<p style="text-align: center; opacity: 0.7;">No movies watched yet. Start picking!</p>';
+                grid.innerHTML = '<p style="text-align: center; opacity: 0.7;">No movies watched yet!</p>';
             } else {
-                elements.watchedGrid.innerHTML = '';
+                grid.innerHTML = '';
                 watchedMovies.forEach(title => {
                     const item = document.createElement('div');
                     item.className = 'watched-item';
                     item.textContent = title;
-                    elements.watchedGrid.appendChild(item);
+                    grid.appendChild(item);
                 });
             }
         }
 
-        // PWA Setup
-        let deferredPrompt;
-
-        function setupPWA() {
-            // Show install prompt
-            window.addEventListener('beforeinstallprompt', (e) => {
-                e.preventDefault();
-                deferredPrompt = e;
-                elements.installPrompt.classList.remove('hidden');
-            });
-
-            elements.installBtn.addEventListener('click', async () => {
-                if (deferredPrompt) {
-                    deferredPrompt.prompt();
-                    const { outcome } = await deferredPrompt.userChoice;
-                    if (outcome === 'accepted') {
-                        elements.installPrompt.classList.add('hidden');
-                    }
-                    deferredPrompt = null;
-                }
-            });
-
-            // Hide install prompt if already installed
-            window.addEventListener('appinstalled', () => {
-                elements.installPrompt.classList.add('hidden');
-            });
-
-            // Register service worker for offline functionality
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/sw.js').catch(console.error);
+        // Reset watched
+        function resetWatched() {
+            if (confirm('Reset all watched movies?')) {
+                watchedMovies = [];
+                localStorage.setItem('watched', JSON.stringify(watchedMovies));
+                updateWatchedDisplay();
+                updateCount();
+                currentUserIndex = 0;
+                updateUsers();
             }
         }
 
-        // Load your CSV data (replace this function with actual CSV loading)
-        async function loadCSVData() {
-            try {
-                // In a real implementation, you would:
-                // 1. Upload your CSV file to a web server
-                // 2. Fetch it here: const response = await fetch('/movies.csv');
-                // 3. Parse it with a CSV parser
-                
-                // For now, using sample data
-                return sampleMovies;
-            } catch (error) {
-                console.error('Error loading CSV:', error);
-                return sampleMovies;
-            }
-        }
+        // Event listeners
+        document.getElementById('randomBtn').addEventListener('click', () => setMode('random'));
+        document.getElementById('alternatingBtn').addEventListener('click', () => setMode('alternating'));
+        document.getElementById('pickBtn').addEventListener('click', pickMovie);
+        document.getElementById('watchedBtn').addEventListener('click', markWatched);
+        document.getElementById('pickAnotherBtn').addEventListener('click', pickMovie);
+        document.getElementById('resetBtn').addEventListener('click', resetWatched);
 
-        // Initialize the app
-        window.addEventListener('load', init);
+        // Initialize
+        updateCount();
+        updateWatchedDisplay();
+        updateUsers();
+
+        console.log('🎬 Martin Family Movie Picker loaded with', movies.length, 'sample movies');
+    </script>
+</body>
+</html>
